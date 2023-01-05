@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Day 4</title>
+</head>
+<body>
+    <h2>Promises,Async/wait</h2>
+    <p id="demo"></p>
+    <script>
+        // function myDisplayer(some)
+        // {
+        //     document.getElementById("demo").innerHTML=some;
+        // }
+
+        // function myFirst()
+        // {
+        //     myDisplayer("Hello");
+        // }
+
+        // function mySecond()
+        // {
+        //     myDisplayer("Bhavya");
+        // }
+
+        // myFirst();
+        // mySecond();
+
+        // function myDisplayer(some)
+        // {
+        //     document.getElementById("demo").innerHTML=some;
+        // }
+
+        // function calculator(num1,num2)
+        // {
+        //     let sum = num1 + num2;
+        //     return sum;
+        // }
+
+        // let result = calculator(5,5);
+        // myDisplayer(result);
+
+        //Asynchronous
+        // function myDisplayer(some)
+        // {
+        //     document.getElementById("demo").innerHTML=some;
+        // }
+
+        // function myCalculator(num1,num2,myCallback)
+        // {
+        //     let sum = num1+ num2;
+        //     myCallback(sum);
+        // }
+        // myCalculator(10,10,myDisplayer);
+
+        //Synchronous 
+        // function show(){
+        //     console.log("I am Show function");
+        // }
+        // function bhavya(callback)
+        // {
+        //     callback();
+        // }
+        // bhavya(show);
+
+        // console.log("End");
+
+        //Asynchronous 
+        // setTimeout(function show()
+        // {
+        //     console.log("I am show function");
+        // },5000);
+
+        // console.log("End");
+
+        //Promise
+        // function prom(complete){
+        //     return new Promise(function(resolve, reject)
+        //     {
+        //         console.log("Fetching data, please wait.")
+        //         setTimeout(()=>{
+        //             if(complete)
+        //             {
+        //                 resolve("I am successful.");
+        //             }
+        //             else{
+        //                 reject("I am failed.");
+        //             }
+        //         },3000)
+        //      });
+        //     }
+
+        //     prom(true).then((result)=>{
+        //         console.log(result);}).catch((error)=>{
+        //         console.log(error);
+        //     });
+
+        //Async & Await
+        // async function test()
+        // {
+        //     return "Hello";
+        // }
+        // console.log(test());
+
+        // async function test()
+        // {
+        //     console.log("2 : Message");
+        //     await console.log("3 : Message");
+        //     console.log("4 : Message");
+        // }
+
+        // console.log("1 : Message");
+        // test();
+        // console.log("5 : Message");
+ 
+        // async function test()
+        // {
+        //     console.log("2 : Message");
+        //     const response = await fetch("json/student_data.json");
+        //     console.log("3 : Message");
+        //     const students = await response.json();
+
+        //     return students;
+        // }
+
+        // console.log("1 : Message");
+        // let a = test();
+        // console.log("4 : Message");
+        // console.log(a);
+
+        async function mydisplay(){
+            let myPromise = new Promise(function(resolve) {
+                setTimeout(function() {resolve("I am bhavya !!");}, 3000);
+            });
+                document.getElementById("demo").innerHTML = await myPromise;
+        }
+
+        mydisplay();
+
+    </script>
+</body>
+</html>

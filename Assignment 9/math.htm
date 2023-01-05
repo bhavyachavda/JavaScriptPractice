@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 9</title>
+</head>
+<body>
+    <h2>Basic Math Operation</h2>
+    <form name="f1" onsubmit="return calculator()">
+        <label for="n1">Please enter first number :</label>
+        <input type="text" name="n1" id="n1"><br><br>
+        <label for="n2">Please enter second number :</label>
+        <input type="text" name="n2" id="n2"><br><br>
+        
+        <label for="operators">Please select operation you want to perform :</label><br>
+
+        <input type="radio" name="num" id="Addition" value="operators">
+        <label for="Addition">+</label><br>
+        <input type="radio" id="Subtraction" name="num" value="operators">
+        <label for="Subtraction">-</label><br>
+        <input type="radio" id="Multiplication" name="num" value="operators">
+        <label for="Multiplication">*</label><br>
+        <input type="radio" id="Division" name="num" value="operators">
+        <label for="Division">/</label><br>
+
+        <input type="submit" value="Calculate">
+        <input type="reset" value="Reset"><br><br>
+        <div id="mess" style="display: none; "></div>
+    </form>
+
+    <script>
+           var n1 = document.forms['f1']['n1'];
+           var n2 = document.forms['f1']['n2'];
+           var message = document.getElementById('mess');
+           var add = document.getElementById('Addition');
+           var sub = document.getElementById('Subtraction');
+           var multi = document.getElementById('Multiplication');
+           var div = document.getElementById('Division');
+
+           function calculator() {
+
+            if (n1.value == "") {
+                message.innerHTML = "Please Enter First Number";
+                message.style.display = "block";
+                return false;
+            }
+            else if (isNaN(n1.value)) {
+                message.innerHTML = "Please enter only numeric value for first number";
+                message.style.display = "block";
+                return false;
+            }
+            else if (n2.value == "") {
+                message.innerHTML = "Please Enter Second Number";
+                message.style.display = "block";
+                return false;
+            }
+            else if (isNaN(n2.value)) {
+                message.innerHTML = "Please enter only numeric value for second number";
+                message.style.display = "block";
+                return false;
+            }
+            else if (Addition.checked == true) {
+                let ans = parseInt(n1.value) + parseInt(n2.value);
+                message.innerHTML = "Result is " + ans;
+                message.style.display = "block";
+                return false;
+            }
+            else if (Subtraction.checked == true) {
+                let ans = parseInt(n1.value) - parseInt(n2.value);
+                message.innerHTML = "Result is " + ans;
+                message.style.display = "block";
+                return false;
+            }
+            else if (Multiplication.checked == true) {
+                let ans = parseInt(n1.value) * parseInt(n2.value);
+                message.innerHTML = "Result is " + ans;
+                message.style.display = "block";
+                return false;
+            }
+            else if (Division.checked == true) {
+                let ans = parseInt(n1.value) / parseInt(n2.value);
+                message.innerHTML = "Result is " + ans;
+                message.style.display = "block";
+                return false;
+            }
+        }
+    </Script>
+</body>
+</html>
