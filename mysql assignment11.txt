@@ -1,0 +1,85 @@
+use bhavyadb;
+drop table product;
+create table product
+   (recid int not null primary key,
+   mfrid int not null,
+   description varchar(20),
+   price int, qty int);
+
+
+select * from product;
+
+create table office
+   (recid int not null primary key,
+   city varchar(20),
+   region varchar(10),
+   manager varchar(10),
+   targetsales int, actualsales int
+   );
+   
+Create Table salesreps (recid int NOT NULL primary key,
+   name varchar(255), officeid int, designation varchar(255),
+   hiredate date, manager varchar(255), quota int,
+   sales int, age int,
+   foreign key (officeid) references office(recid));
+   
+   create table customer
+   (recid int not null primary key,
+   company varchar(25),
+   salesrepsid int not null, creditlimit int,
+   foreign key (salesrepsid) references salesreps(recid));
+   
+create table orders
+   (recid int not null primary key,
+   customerid int,
+   orderdate date,
+   salesrepsid int,
+   productid int, qty int,
+   amount int,
+   foreign key (customerid) references customer(recid),
+   foreign key(salesrepsid) references salesreps(recid),
+   foreign key(productid) references product(recid)
+   );
+   
+Insert Into office values
+(1, "Jaipur", "Science", "Rakesh", 80000, 25000),
+(2, "Jaipur", "Garden", "Dev", 90000, 30000),
+(3, "Ahmedabad", "Metro", "Jay", 88000, 64000);
+
+Insert Into salesreps values
+(1, "Kamlesh", 1, "Account manager", '2006-01-01', "Mehul", 10, 10000, 21),
+(2, "Rajesh", 2, "Sales manager", '2005-12-25', "Raju", 11, 12000, 21),
+(3, "Dharam", 3, "Account executive", '2005-11-20', "Rahul", 12, 11000, 22);
+   
+
+Insert Into customer values
+(1, "BMW", 1, 25000),
+(2, "Tata", 2, 32000),
+(3, "Audi", 1, 46000);
+
+Insert Into product (recid, mfrid, description, price, qty) values
+(1, 1, "PEN", 100, 80),
+(2, 2, "Pencil", 20, 50),
+(3, 3, "Watch", 500, 150);
+
+Insert Into orders (recid, customerid, orderdate, salesrepsid, productid, qty, amount) values
+(1, 1, '2015-11-23', 1, 1001, 1, 12000),
+(2, 2, '2012-10-12', 2, 1002, 2, 10000),
+(3, 3, '2020-07-08', 3, 1003, 3, 8000);	
+
+select * from orders;
+
+
+select name, city, COUNT(cs.recid), hiredate, age from customer cs inner join salesreps sale
+on cs.salesrepsid = sale.recid inner join office off on sale.officeid = off.recid
+where hiredate<('2007-01-01') and age > 20 and city LIKE '%pur' group by sale.recid having count(cs.recid>=1);
+
+select cs.company, sr.name, off.city, cs.creditlimit from customer as cs
+inner join salesreps as sr on cs.salesrepsid=sr.recid inner join office as off
+on sr.officeid = off.recid;
+
+
+select o.city,count(s.officeid),sum(s.sales),o.targetsales,o.actualsales,(targetsales-actualsales) as diff 
+from office as o inner join salesreps as s
+on o.recid = s.officeid
+group by officeid;
